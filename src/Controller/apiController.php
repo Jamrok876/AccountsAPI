@@ -12,7 +12,7 @@
          * @Method({"GET"})
 		 */
 		public function contacts($status='all', $sortBy ='default'){
-            $results        = array();   
+            $results        = array();
             $status         = strtolower($status);
             $valid_statuses = array('all', 'active', 'inactive');
             if(!in_array($status, $valid_statuses)){
