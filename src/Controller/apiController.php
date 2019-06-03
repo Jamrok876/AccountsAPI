@@ -1,17 +1,18 @@
 <?php
-	namespace App\Controller;
-	
-	use Symfony\Component\HttpFoundation\Response;
-	use Symfony\Component\Routing\Annotation\Route;
-	use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+    namespace App\Controller;
+    
+    use Symfony\Component\HttpFoundation\Response;
+    use Symfony\Component\Routing\Annotation\Route;
+    use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
     use Symfony\Bundle\FrameworkBundle\Controller\Controller;
     
-	class apiController extends Controller {
-		/**
-		 * @Route("/getContacts/{status}/{sortBy}")
+    class apiController extends Controller {
+        
+        /**
+         * @Route("/getContacts/{status}/{sortBy}")
          * @Method({"GET"})
-		 */
-		public function contacts($status='all', $sortBy ='default'){
+         */
+        public function contacts($status='all', $sortBy ='default'){
             $results        = array();
             $status         = strtolower($status);
             $valid_statuses = array('all', 'active', 'inactive');
@@ -68,10 +69,10 @@
         }
 
         /**
-		 * @Route("/activeAccounts")
+         * @Route("/activeAccounts")
          * @Method({"GET"})
-		 */
-		public function activeAccounts() {
+         */
+        public function activeAccounts() {
             $results       = array();
             $path          = $this->get('kernel')->getRootDir();
             $accounts_json = file_get_contents($path.'\accounts.json');
@@ -93,10 +94,10 @@
         }
 
         /**
-		 * @Route("/findPrimaryContact/{accountId}")
+         * @Route("/findPrimaryContact/{accountId}")
          * @Method({"GET"})
-		 */
-		public function primaryContact($accountId = null){
+         */
+        public function primaryContact($accountId = null){
             $results   = array();
             $accountId = (int)$accountId;
             if(empty($accountId)){
@@ -133,4 +134,4 @@
 
             return $response->setContent(json_encode($results));
         }
-	}
+    }
